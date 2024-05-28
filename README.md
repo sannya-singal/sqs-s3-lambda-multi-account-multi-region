@@ -49,14 +49,14 @@ Create the SQS queue in Account A and set the policy to allow Account C to send 
 
 ```bash
 QUEUE_URL=$(awslocal sqs create-queue --queue-name $QUEUE_NAME --attributes VisibilityTimeout=300 --query 'QueueUrl' --output text)
-awslocal sqs set-queue-attributes --queue-url $QUEUE_URL --attributes file://sqs-policy1.json
+awslocal sqs set-queue-attributes --queue-url $QUEUE_URL --attributes file://policy/sqs-policy1.json
 ```
 
 Create the S3 bucket in Account A and set the policy to allow Account C to upload files to the bucket in Account A:
 
 ```bash
 awslocal s3api create-bucket --bucket $BUCKET_NAME
-awslocal s3api put-bucket-policy --bucket $BUCKET_NAME --policy file://s3-policy1.json
+awslocal s3api put-bucket-policy --bucket $BUCKET_NAME --policy file://policy/s3-policy1.json
 ```
 
 ## Create the SQS queue and S3 bucket in Account B
@@ -81,14 +81,14 @@ Create the SQS queue in Account B and set the policy to allow Account C to send 
 
 ```bash
 QUEUE_URL=$(awslocal sqs create-queue --queue-name $QUEUE_NAME --region eu-west-1 --attributes VisibilityTimeout=300 --query 'QueueUrl' --output text)
-awslocal sqs set-queue-attributes --queue-url $QUEUE_URL --attributes file://sqs-policy2.json
+awslocal sqs set-queue-attributes --queue-url $QUEUE_URL --attributes file://policy/sqs-policy2.json
 ```
 
 Create the S3 bucket in Account B and set the policy to allow Account C to upload files to the bucket in Account B:
 
 ```bash
 awslocal s3api create-bucket --bucket $BUCKET_NAME
-awslocal s3api put-bucket-policy --bucket $BUCKET_NAME --policy file://s3-policy2.json
+awslocal s3api put-bucket-policy --bucket $BUCKET_NAME --policy file://policy/s3-policy2.json
 ```
 
 ## Create the Lambda function and API Gateway in Account C
@@ -103,8 +103,8 @@ export AWS_SECRET_ACCESS_KEY=test
 Create lambda execution role and attach it to the policy:
 
 ```bash
-awslocal iam create-role --role-name common-lambda-role --assume-role-policy-document file://trust-policy.json
-awslocal iam put-role-policy --role-name common-lambda-role --policy-name common-lambda-policy --policy-document file://lambda-policy.json
+awslocal iam create-role --role-name common-lambda-role --assume-role-policy-document file://policy/trust-policy.json
+awslocal iam put-role-policy --role-name common-lambda-role --policy-name common-lambda-policy --policy-document file://policy/lambda-policy.json
 ```
 
 Create the deployment package for the Lambda function and create the function:
