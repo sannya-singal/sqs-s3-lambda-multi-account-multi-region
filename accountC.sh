@@ -1,8 +1,8 @@
 export AWS_ACCESS_KEY_ID=333333333333
 export AWS_SECRET_ACCESS_KEY=test
 
-awslocal iam create-role --role-name common-lambda-role --assume-role-policy-document file://trust-policy.json
-awslocal iam put-role-policy --role-name common-lambda-role --policy-name common-lambda-policy --policy-document file://lambda-policy.json
+awslocal iam create-role --role-name common-lambda-role --assume-role-policy-document file://policy/trust-policy.json
+awslocal iam put-role-policy --role-name common-lambda-role --policy-name common-lambda-policy --policy-document file://policy/lambda-policy.json
 
 zip lambda_function.zip lambda_function.py
             
@@ -34,4 +34,3 @@ awslocal lambda add-permission \
                 --principal apigateway.amazonaws.com \
                 --source-arn "arn:aws:execute-api:us-east-1:333333333333:$API_ID/*/*/*" \
                 --source-account 333333333333
-                
