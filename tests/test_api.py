@@ -68,4 +68,3 @@ class TestAPI:
         response = s3_client.get_object(Bucket=bucket_name, Key=bucket_key)
         content = response["Body"].read().decode("utf-8")
         assert content == body["content"]
-        

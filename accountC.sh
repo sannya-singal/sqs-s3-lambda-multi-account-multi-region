@@ -34,3 +34,4 @@ awslocal lambda add-permission \
                 --principal apigateway.amazonaws.com \
                 --source-arn "arn:aws:execute-api:us-east-1:333333333333:$API_ID/*/*/*" \
                 --source-account 333333333333
+                
