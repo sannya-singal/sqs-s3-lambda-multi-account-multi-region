@@ -59,9 +59,13 @@ class TestAPI:
         sqs_client = client("sqs", account_id=body["account"], region_name=body["region"])
         response = sqs_client.receive_message(QueueUrl=queue_url)
         messages = response.get("Messages", [])
+        receipt_handle = response.get("ReceiptHandle", None)
         assert len(messages) == 1
         message = messages[0]
         assert message["Body"] == f"File {bucket_key} uploaded to bucket {bucket_name}"
+        # delete message
+        if receipt_handle:
+            sqs_client.delete_message(QueueUrl=queue_url, ReceiptHandle=receipt_handle)
 
         # test s3 content
         s3_client = client("s3", account_id=body["account"], region_name=body["region"])
