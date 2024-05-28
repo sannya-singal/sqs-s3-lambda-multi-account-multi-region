@@ -2,6 +2,8 @@
 
 This repository contains an example on how to deploy a multi-account, multi-region setup in which a Lambda function in one account invoked by a REST API sends a message to an SQS queue in another account and another region and uploads a file to an S3 bucket in the same account and region as the SQS queue.
 
+![Architecture](images/architecture.png)
+
 LocalStack supports cross-account setup that allows you to namespace resources based on the AWS Account ID. In this example, you can use three local AWS accounts to simulate the cross-account setup. They are:
 
 - **Account A** (`111111111111`): The account that contains the SQS queue and the S3 bucket in `us-east-1` region.
