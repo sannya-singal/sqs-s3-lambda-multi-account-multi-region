@@ -1,0 +1,3 @@
+{
+  "Policy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": {\"AWS\": [\"arn:aws:iam::333333333333:root\"]}, \"Action\": \"sqs:*\", \"Resource\": [\"arn:aws:sqs:eu-west-1:222222222222:team-queue-222222222222\"]}]}"
+}

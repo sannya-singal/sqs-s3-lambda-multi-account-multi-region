@@ -1,0 +1,3 @@
+venv
+lambda_function.zip
+tests/__pycache__/
